@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI8.MainPage"
+             xmlns:vm="clr-namespace:MAUI8.Models.ViewModels"
+             xmlns:models="clr-namespace:MAUI8.Models"
+             x:DataType="vm:MainPageViewModel"
+             BackgroundColor="#3663ad">
+    <ContentPage.Resources>
+
+    </ContentPage.Resources>
+    <Grid VerticalOptions="FillAndExpand" RowDefinitions=".25*,.75*">
+        <Image Source="logo.png" WidthRequest="300" HeightRequest="200" Aspect="AspectFit" HorizontalOptions="Center"/>
+        <CollectionView Grid.Row="1" x:Name="collectionView" SelectionMode="Single" SelectedItem="{Binding SelectedPokemon}" SelectionChangedCommand="{Binding TestCommand}"  VerticalOptions="FillAndExpand" ItemsSource="{Binding Pokemons}" Scrolled="CollectionView_Scrolled" WidthRequest="300" HorizontalOptions="Center" Margin="-10,0,0,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Pokemon">
+                    <Border Margin="5,10" StrokeThickness="1" Stroke="black" BackgroundColor="#020065" StrokeShape="RoundRectangle 20,20,20,20">
+
+                        <Border.Shadow>
+                            <Shadow Opacity="0.7" Radius="1" Offset="0,0" Brush="black"/>
+                        </Border.Shadow>
+                        <HorizontalStackLayout MinimumWidthRequest="300" MinimumHeightRequest="200">
+                            <VerticalStackLayout HeightRequest="200">
+                                <Image Source="{Binding Sprites.FrontDefault}"  WidthRequest="100" HeightRequest="100"/>
+                                <Image Source="{Binding Sprites.BackDefault}" WidthRequest="100" HeightRequest="100"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Name}" FontSize="25" FontAttributes="Bold"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>
